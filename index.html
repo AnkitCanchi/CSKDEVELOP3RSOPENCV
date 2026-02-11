@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FTC OpenCV Website | Help #16075 with Computer Vision</title>
-  <meta name="description" content="FTC OpenCV resources and tutorials created to help Team #16075 with Computer Vision." />
+  <title>FTC OpenCV Website | CSK DEVELOP3RS (Team 23441)</title>
+  <meta name="description" content="FTC OpenCV resources and tutorials created by CSK DEVELOP3RS (Team 23441) to support Computer Vision development." />
   <style>
     :root{
       --bg:#f6f9ff;
@@ -221,6 +221,16 @@
       flex: 0 0 auto;
     }
 
+    .notice{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(199,221,255,.95);
+      background: linear-gradient(180deg, #ffffff, #f4f8ff);
+      color:var(--muted);
+      line-height:1.55;
+      font-size:14px;
+    }
+
     footer{
       padding:26px 0 34px;
       color:var(--muted);
@@ -240,13 +250,14 @@
           <div class="logo" aria-hidden="true"></div>
           <div>
             <div style="font-size:14px; line-height:1;">FTC OpenCV</div>
-            <div style="font-size:12px; color:var(--muted); font-weight:700;">Help Team #16075</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:700;">CSK DEVELOP3RS • Team 23441</div>
           </div>
         </a>
         <nav class="navlinks" aria-label="Site navigation">
           <a href="#features">Features</a>
           <a href="#tutorials">Tutorials</a>
           <a href="#resources">Resources</a>
+          <a href="#scrimmage">Scrimmage</a>
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -259,8 +270,8 @@
       <section class="hero">
         <div class="heroGrid">
           <div class="card heroCard">
-            <span class="badge"><span class="badgeDot"></span> Built for FTC teams using OpenCV</span>
-            <h1>FTC OpenCV Website<br/>Created to help <span style="color:var(--blue)">#16075</span> with Computer Vision</h1>
+            <span class="badge"><span class="badgeDot"></span> Computer vision hub for FTC teams</span>
+            <h1>FTC OpenCV Website<br/>Created by <span style="color:var(--blue)">Team 23441</span></h1>
             <p class="sub">
               A simple hub for pipelines, examples, and checklists so drivers and programmers can test vision fast,
               tune confidently, and ship reliable autonomous.
@@ -298,11 +309,9 @@
               </div>
             </div>
 
-            <div style="margin-top:14px; padding:14px; border-radius:16px; border:1px solid rgba(199,221,255,.95); background:#fff;">
-              <div style="font-weight:900; margin-bottom:8px;">Recommended workflow</div>
-              <div class="small">
-                Record camera feed → tune thresholds → validate at distance → lock settings → test in match timing.
-              </div>
+            <div style="margin-top:14px;" class="notice">
+              <div style="font-weight:900; margin-bottom:6px; color:var(--text);">Recommended workflow</div>
+              Record camera feed → tune thresholds → validate at distance → lock settings → test in match timing.
             </div>
           </div>
         </div>
@@ -377,13 +386,37 @@ results:
             </div>
           </div>
         </div>
+
+        <div style="height:12px"></div>
+
+        <div class="twoCol">
+          <div class="card" style="padding:16px;">
+            <h3 style="margin:0 0 8px;">3) AprilTag Sanity Checks</h3>
+            <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.7;">
+              <li>Confirm camera intrinsics match your resolution.</li>
+              <li>Measure 1 real distance and compare to estimated distance.</li>
+              <li>Test at different angles, not only straight-on.</li>
+              <li>Log detection FPS to avoid lag in autonomous.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="padding:16px;">
+            <h3 style="margin:0 0 8px;">4) Competition Prep</h3>
+            <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.7;">
+              <li>Bring final tuning values in a printed or offline note.</li>
+              <li>Have a no-vision backup autonomous routine ready.</li>
+              <li>Check camera mount, cable strain relief, and focus.</li>
+              <li>Run 10+ practice starts before queueing.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section id="resources">
         <div class="sectionHead">
           <div>
             <h2>Resources</h2>
-            <p>Add your team links here: GitHub repo, tuning spreadsheet, calibration photos, and driver notes.</p>
+            <p>Paste your team links here: GitHub repo, tuning log, calibration photos, and driver notes.</p>
           </div>
         </div>
 
@@ -399,9 +432,40 @@ results:
             <p><strong>Link:</strong> <span style="color:var(--muted)">[paste your sheet URL]</span></p>
           </div>
           <div class="card tile">
-            <div class="icon">DV</div>
-            <h3>Driver Notes</h3>
-            <p><strong>Link:</strong> <span style="color:var(--muted)">[paste your notes URL]</span></p>
+            <div class="icon">CAM</div>
+            <h3>Calibration Photos</h3>
+            <p><strong>Link:</strong> <span style="color:var(--muted)">[paste your folder URL]</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="scrimmage">
+        <div class="sectionHead">
+          <div>
+            <h2>FTC Scrimmage Support</h2>
+            <p>CSK DEVELOP3RS participated and helped organize an FTC scrimmage for local teams, providing drivers with match practice before official league meets.</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px;">
+          <div class="twoCol">
+            <div>
+              <h3 style="margin:0 0 8px;">What teams did</h3>
+              <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.7;">
+                <li>Tested autonomous routines under match timing</li>
+                <li>Refined mechanisms between quick practice rounds</li>
+                <li>Scrimmaged in a low-pressure environment before competition</li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="margin:0 0 8px;">Scrimmage name ideas</h3>
+              <div class="notice">
+                <div style="font-weight:900; color:var(--text); margin-bottom:6px;">Pick one</div>
+                Develop3RS Preseason Invitational<br/>
+                CSK Field Trials Scrimmage<br/>
+                Autonomous Tune-Up Scrimmage
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -410,7 +474,7 @@ results:
         <div class="sectionHead">
           <div>
             <h2>FAQ</h2>
-            <p>Quick answers teams usually need when vision becomes inconsistent.</p>
+            <p>Quick answers for when vision becomes inconsistent.</p>
           </div>
         </div>
 
@@ -421,8 +485,8 @@ results:
               <span class="chev">▾</span>
             </button>
             <div class="content">
-              Lighting changes, background clutter, and different camera exposure can break thresholds. Re-test under
-              bright lights and add a safety margin to your filters.
+              Lighting changes, background clutter, and different camera exposure can break thresholds.
+              Re-test under bright lights and add a safety margin to your filters.
             </div>
           </div>
 
@@ -432,19 +496,19 @@ results:
               <span class="chev">▾</span>
             </button>
             <div class="content">
-              Use an ROI, filter by contour area, and average results over a few frames. Also keep FPS consistent by
-              avoiding heavy drawing inside the pipeline.
+              Use an ROI, filter by contour area, and average results over a few frames.
+              Keep FPS consistent by avoiding heavy drawing inside the pipeline.
             </div>
           </div>
 
           <div class="item card">
             <button type="button">
-              <span>What should we print or bring to competition?</span>
+              <span>What should we bring to competition?</span>
               <span class="chev">▾</span>
             </button>
             <div class="content">
-              A one-page tuning sheet with your final parameters, a backup plan (no-vision auto), and a checklist for
-              camera mount + cable checks.
+              A one-page tuning sheet with final parameters, a no-vision backup auto,
+              and a checklist for camera mount and cable checks.
             </div>
           </div>
         </div>
@@ -454,7 +518,7 @@ results:
         <div class="sectionHead">
           <div>
             <h2>Contact</h2>
-            <p>Use this section for collaboration requests, scrimmage support, or sharing pipelines with other teams.</p>
+            <p>Use this section for collaboration requests or sharing vision pipelines.</p>
           </div>
         </div>
 
@@ -462,9 +526,9 @@ results:
           <div class="twoCol">
             <div>
               <div style="font-weight:900; margin-bottom:6px;">Team</div>
-              <div class="small">FTC Team #16075</div>
+              <div class="small">CSK DEVELOP3RS • FTC Team 23441</div>
               <div class="small" style="margin-top:6px; color:var(--muted);">
-                Replace the placeholders below with your real contact info.
+                Replace placeholders with real contact info.
               </div>
             </div>
             <div>
@@ -484,7 +548,7 @@ results:
     <div class="container">
       <div class="footRow">
         <div class="small">
-          <strong>FTC OpenCV Website</strong> • Created to help Team #16075 with Computer Vision
+          <strong>FTC OpenCV Website</strong> • Created by CSK DEVELOP3RS • Team 23441
         </div>
         <div class="small">
           © <span id="year"></span> • Built for FTC
