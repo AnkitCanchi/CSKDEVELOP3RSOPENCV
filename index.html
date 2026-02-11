@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FTC OpenCV Website | Help #16075 with Computer Vision</title>
+  <meta name="description" content="FTC OpenCV resources and tutorials created to help Team #16075 with Computer Vision." />
+  <style>
+    :root{
+      --bg:#f6f9ff;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --blue:#1d4ed8;
+      --blue2:#60a5fa;
+      --border:#c7ddff;
+      --shadow: 0 10px 30px rgba(2, 44, 140, 0.12);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(900px 500px at 15% 0%, rgba(96,165,250,.35), transparent 60%),
+                  radial-gradient(900px 500px at 85% 10%, rgba(29,78,216,.20), transparent 55%),
+                  var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 18px}
+    header{
+      position:sticky;top:0;z-index:50;
+      background: rgba(246,249,255,.78);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(199,221,255,.7);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-weight:800;letter-spacing:.2px;
+    }
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;inset:-40% -40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 55%);
+      transform: rotate(18deg);
+    }
+    .navlinks{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+    .navlinks a{
+      padding:8px 10px;border-radius:12px;
+      color:var(--muted);
+      border:1px solid transparent;
+    }
+    .navlinks a:hover{
+      color:var(--text);
+      border-color: rgba(199,221,255,.9);
+      background:#fff;
+    }
+
+    .hero{padding:42px 0 10px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .heroGrid{grid-template-columns:1fr}
+    }
+    .card{
+      background:var(--card);
+      border:1px solid rgba(199,221,255,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroCard{padding:26px}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 12px;border-radius:999px;
+      border:1px solid rgba(199,221,255,.9);
+      background: linear-gradient(180deg, #ffffff, #f2f7ff);
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+    }
+    .badgeDot{width:9px;height:9px;border-radius:999px;background:var(--blue)}
+    h1{
+      margin:14px 0 10px;
+      font-size:44px;
+      line-height:1.04;
+      letter-spacing:-.8px;
+    }
+    @media (max-width: 520px){
+      h1{font-size:34px}
+    }
+    .sub{
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.55;
+      margin:0 0 18px;
+      max-width:60ch;
+    }
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:11px 14px;border-radius:14px;
+      border:1px solid rgba(199,221,255,.95);
+      background:#fff;
+      font-weight:750;
+      cursor:pointer;
+    }
+    .btnPrimary{
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      color:#fff;border-color:transparent;
+      box-shadow: 0 12px 26px rgba(29,78,216,.25);
+    }
+    .btnPrimary:hover{filter:brightness(1.02)}
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0px)}
+    .mini{
+      margin-top:18px;
+      display:flex;gap:10px;flex-wrap:wrap;
+      color:var(--muted);font-size:13px;
+    }
+    .pill{
+      padding:7px 10px;border-radius:999px;
+      border:1px solid rgba(199,221,255,.9);
+      background:#fff;
+    }
+
+    .sideCard{padding:22px}
+    .sideTitle{font-weight:850;font-size:15px;margin:0 0 12px}
+    .kpiGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .kpi{
+      padding:12px;border-radius:16px;
+      border:1px solid rgba(199,221,255,.9);
+      background: linear-gradient(180deg, #ffffff, #f4f8ff);
+    }
+    .kpiNum{font-weight:900;font-size:22px;margin:0}
+    .kpiLbl{color:var(--muted);font-size:12px;margin:6px 0 0}
+
+    section{padding:28px 0}
+    .sectionHead{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.2px;
+    }
+    .sectionHead p{margin:0;color:var(--muted);max-width:70ch}
+
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width: 860px){.grid3{grid-template-columns:1fr}}
+    .tile{padding:16px}
+    .tile h3{margin:4px 0 6px;font-size:16px}
+    .tile p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+    .icon{
+      width:36px;height:36px;border-radius:12px;
+      background: rgba(29,78,216,.10);
+      border:1px solid rgba(199,221,255,.95);
+      display:grid;place-items:center;
+      color:var(--blue);
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width: 860px){.twoCol{grid-template-columns:1fr}}
+    .codeBox{
+      padding:16px;
+      background: #0b1220;
+      border-radius: 16px;
+      color:#e2e8f0;
+      border:1px solid rgba(199,221,255,.20);
+      overflow:auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12.5px;
+      line-height:1.5;
+    }
+
+    .accordion .item{
+      border:1px solid rgba(199,221,255,.95);
+      background:#fff;border-radius:16px;
+      overflow:hidden;
+    }
+    .accordion button{
+      width:100%;
+      text-align:left;
+      border:0;
+      background: linear-gradient(180deg, #ffffff, #f3f8ff);
+      padding:14px 14px;
+      font-weight:850;
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
+    .accordion .content{
+      padding:0 14px 14px;
+      color:var(--muted);
+      line-height:1.55;
+      display:none;
+    }
+    .accordion .item.open .content{display:block}
+    .chev{
+      width:26px;height:26px;border-radius:10px;
+      border:1px solid rgba(199,221,255,.95);
+      display:grid;place-items:center;
+      color:var(--blue);
+      flex: 0 0 auto;
+    }
+
+    footer{
+      padding:26px 0 34px;
+      color:var(--muted);
+      border-top:1px solid rgba(199,221,255,.75);
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(8px);
+    }
+    .footRow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .small{font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; line-height:1;">FTC OpenCV</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:700;">Help Team #16075</div>
+          </div>
+        </a>
+        <nav class="navlinks" aria-label="Site navigation">
+          <a href="#features">Features</a>
+          <a href="#tutorials">Tutorials</a>
+          <a href="#resources">Resources</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container">
+      <section class="hero">
+        <div class="heroGrid">
+          <div class="card heroCard">
+            <span class="badge"><span class="badgeDot"></span> Built for FTC teams using OpenCV</span>
+            <h1>FTC OpenCV Website<br/>Created to help <span style="color:var(--blue)">#16075</span> with Computer Vision</h1>
+            <p class="sub">
+              A simple hub for pipelines, examples, and checklists so drivers and programmers can test vision fast,
+              tune confidently, and ship reliable autonomous.
+            </p>
+            <div class="ctaRow">
+              <a class="btn btnPrimary" href="#tutorials">Start Tutorials</a>
+              <a class="btn" href="#resources">Get Resources</a>
+            </div>
+            <div class="mini">
+              <span class="pill">OpenCV</span>
+              <span class="pill">FTC SDK</span>
+              <span class="pill">AprilTags</span>
+              <span class="pill">Pipeline Tuning</span>
+            </div>
+          </div>
+
+          <div class="card sideCard">
+            <p class="sideTitle">Quick Goals</p>
+            <div class="kpiGrid">
+              <div class="kpi">
+                <p class="kpiNum">1</p>
+                <p class="kpiLbl">Reliable detection target</p>
+              </div>
+              <div class="kpi">
+                <p class="kpiNum">3</p>
+                <p class="kpiLbl">Lighting test setups</p>
+              </div>
+              <div class="kpi">
+                <p class="kpiNum">5</p>
+                <p class="kpiLbl">Tuning parameters tracked</p>
+              </div>
+              <div class="kpi">
+                <p class="kpiNum">10+</p>
+                <p class="kpiLbl">Practice runs per change</p>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; padding:14px; border-radius:16px; border:1px solid rgba(199,221,255,.95); background:#fff;">
+              <div style="font-weight:900; margin-bottom:8px;">Recommended workflow</div>
+              <div class="small">
+                Record camera feed → tune thresholds → validate at distance → lock settings → test in match timing.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="sectionHead">
+          <div>
+            <h2>What this site includes</h2>
+            <p>Everything is designed to be copy-friendly and testable in a low-pressure practice environment.</p>
+          </div>
+        </div>
+        <div class="grid3">
+          <div class="card tile">
+            <div class="icon">CV</div>
+            <h3>Starter pipelines</h3>
+            <p>Basic color thresholding, contour filtering, and position estimation you can expand.</p>
+          </div>
+          <div class="card tile">
+            <div class="icon">AT</div>
+            <h3>AprilTag setup</h3>
+            <p>Practical checklist for calibration, distance sanity checks, and runtime stability.</p>
+          </div>
+          <div class="card tile">
+            <div class="icon">QA</div>
+            <h3>Testing + tuning</h3>
+            <p>Parameter logging, lighting tests, and repeatable steps to avoid “works once” vision.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tutorials">
+        <div class="sectionHead">
+          <div>
+            <h2>Tutorials</h2>
+            <p>Drop these into your notes and update the details to match your camera and field setup.</p>
+          </div>
+        </div>
+
+        <div class="twoCol">
+          <div class="card" style="padding:16px;">
+            <h3 style="margin:0 0 8px;">1) Pipeline Checklist</h3>
+            <ol style="margin:0; padding-left:18px; color:var(--muted); line-height:1.7;">
+              <li>Pick one target: sleeve, prop, tag, or colored element.</li>
+              <li>Lock exposure and resolution settings.</li>
+              <li>Add overlay telemetry: FPS, threshold values, target X/Y.</li>
+              <li>Test at 3 distances: close, mid, far.</li>
+              <li>Retest under different lighting and from different angles.</li>
+            </ol>
+          </div>
+
+          <div class="card" style="padding:16px;">
+            <h3 style="margin:0 0 8px;">2) Parameter Tracking</h3>
+            <div class="codeBox" aria-label="Example parameter log format">
+# Vision Parameter Log (copy this)
+date:
+camera:
+resolution:
+exposure:
+
+target:
+- hsv_lower: [H,S,V]
+- hsv_upper: [H,S,V]
+- min_area:
+- max_area:
+- roi:
+
+results:
+- detection_rate:
+- avg_fps:
+- notes:
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resources">
+        <div class="sectionHead">
+          <div>
+            <h2>Resources</h2>
+            <p>Add your team links here: GitHub repo, tuning spreadsheet, calibration photos, and driver notes.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card tile">
+            <div class="icon">GH</div>
+            <h3>Code Repo</h3>
+            <p><strong>Link:</strong> <span style="color:var(--muted)">[paste your GitHub URL]</span></p>
+          </div>
+          <div class="card tile">
+            <div class="icon">SP</div>
+            <h3>Tuning Log</h3>
+            <p><strong>Link:</strong> <span style="color:var(--muted)">[paste your sheet URL]</span></p>
+          </div>
+          <div class="card tile">
+            <div class="icon">DV</div>
+            <h3>Driver Notes</h3>
+            <p><strong>Link:</strong> <span style="color:var(--muted)">[paste your notes URL]</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="sectionHead">
+          <div>
+            <h2>FAQ</h2>
+            <p>Quick answers teams usually need when vision becomes inconsistent.</p>
+          </div>
+        </div>
+
+        <div class="accordion" style="display:grid; gap:10px;">
+          <div class="item card">
+            <button type="button">
+              <span>Why does it work at home but fail at events?</span>
+              <span class="chev">▾</span>
+            </button>
+            <div class="content">
+              Lighting changes, background clutter, and different camera exposure can break thresholds. Re-test under
+              bright lights and add a safety margin to your filters.
+            </div>
+          </div>
+
+          <div class="item card">
+            <button type="button">
+              <span>How do we make detection more stable?</span>
+              <span class="chev">▾</span>
+            </button>
+            <div class="content">
+              Use an ROI, filter by contour area, and average results over a few frames. Also keep FPS consistent by
+              avoiding heavy drawing inside the pipeline.
+            </div>
+          </div>
+
+          <div class="item card">
+            <button type="button">
+              <span>What should we print or bring to competition?</span>
+              <span class="chev">▾</span>
+            </button>
+            <div class="content">
+              A one-page tuning sheet with your final parameters, a backup plan (no-vision auto), and a checklist for
+              camera mount + cable checks.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="sectionHead">
+          <div>
+            <h2>Contact</h2>
+            <p>Use this section for collaboration requests, scrimmage support, or sharing pipelines with other teams.</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px;">
+          <div class="twoCol">
+            <div>
+              <div style="font-weight:900; margin-bottom:6px;">Team</div>
+              <div class="small">FTC Team #16075</div>
+              <div class="small" style="margin-top:6px; color:var(--muted);">
+                Replace the placeholders below with your real contact info.
+              </div>
+            </div>
+            <div>
+              <div style="font-weight:900; margin-bottom:6px;">Email</div>
+              <div class="small"><span style="color:var(--muted)">[team email here]</span></div>
+              <div class="small" style="margin-top:10px;">
+                <a class="btn btnPrimary" href="mailto:team@example.com">Email the Team</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footRow">
+        <div class="small">
+          <strong>FTC OpenCV Website</strong> • Created to help Team #16075 with Computer Vision
+        </div>
+        <div class="small">
+          © <span id="year"></span> • Built for FTC
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for in-page links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Accordion behavior
+    document.querySelectorAll('.accordion .item button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.item');
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.accordion .item').forEach(i => i.classList.remove('open'));
+        if (!open) item.classList.add('open');
+      });
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
